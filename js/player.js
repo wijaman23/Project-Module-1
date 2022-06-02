@@ -4,8 +4,8 @@ class Player {
         this.x = ctx.canvas.width / 2 
         this.y = ctx.canvas.height - 10
 
-        this.w = 80
-        this.h = 20
+        this.w = 75
+        this.h = 10
 
         this.vx = 0
 
@@ -25,14 +25,13 @@ class Player {
         this.audio.play()
     }
 
-    move() {
-        
+    move() {  
         if (this.x + this.w > this.ctx.canvas.width) {
             this.x = this.ctx.canvas.width - this.w
             this.vx = 0;
           }
 
-        if (this.x <= 0) {
+        if (this.x < 0) {
             this.x = 0
             this.vx = 0
         }
@@ -41,10 +40,10 @@ class Player {
 
     keyDown(key) {
         if(key === KEY_RIGHT) {
-            this.vx = 7
+            this.vx = 6
         }
         else if(key === KEY_LEFT) {
-            this.vx = -7
+            this.vx = -6
         }
     }
     keyUp(key){

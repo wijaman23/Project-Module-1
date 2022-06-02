@@ -6,6 +6,7 @@ class Game {
         this.bg = new Background(ctx)
         this.ball = new Ball(ctx)
         this.player = new Player(ctx)
+        this.enemy = new Enemy(ctx)
 
         this.setListeners();
     }
@@ -17,7 +18,7 @@ class Game {
             this.draw()
             this.move()
           } else {
-            this.stop()
+            this.gameOver()
           }
         }, 1000 / 60)
       }
@@ -30,7 +31,7 @@ class Game {
 
     clear() {
         this.ctx.clearRect(
-          0,0, this.ctx.canvas.with, this.ctx.canvas.height
+          0, 0, this.ctx.canvas.with, this.ctx.canvas.height
         )
     }
 
@@ -38,12 +39,19 @@ class Game {
         this.bg.draw()
         this.ball.draw()
         this.player.draw()
+       // this.enemy.draw()
     }    
 
     move() {
         this.bg.move()
         this.ball.move()
         this.player.move()
+    }
+    
+    gameOver(){
+      clearInterval(this.interval)
+      this.interval = null
+      this.player.audio.pause()
     }
 
     setListeners() {

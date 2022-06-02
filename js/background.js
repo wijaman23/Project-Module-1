@@ -21,7 +21,7 @@ class Background {
         this.h
       )
   
-      this.ctx.drawImage(
+    this.ctx.drawImage(
         this.img,
         this.x,
         this.y + this.ctx.canvas.height,
