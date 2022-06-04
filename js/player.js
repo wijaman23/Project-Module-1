@@ -4,23 +4,29 @@ class Player {
         this.x = ctx.canvas.width / 2 
         this.y = ctx.canvas.height - 10
 
-        this.w = 75
-        this.h = 10
+        this.w = 80
+        this.h = 12
 
         this.vx = 0
 
         this.color = 'red'
 
+        this.ctx.lineWidth = 5
+
         this.audio = new Audio('/audio/Chiptronical.ogg')
         this.audio.loop = true
-        this.audioFin = true
     }
 
 
     draw() {
-        this.ctx.rect(this.x, this.y, this.w, this.h)
+        const prevStyle = this.ctx.fillStyle
         this.ctx.fillStyle = this.color
-        this.ctx.fill()
+        this.ctx.fillRect(this.x, this.y - this.h, this.w, this.h)
+        
+        this.ctx.strokeStyle = 'white'
+        this.ctx.strokeRect(this.x, this.y - this.h, this.w, this.h)
+
+        this.ctx.fillStyle = prevStyle
         
         this.audio.play()
     }
@@ -39,10 +45,10 @@ class Player {
     }
 
     keyDown(key) {
-        if(key === KEY_RIGHT) {
+        if(key === KEY_RIGHT && this.x < this.ctx.canvas.width - this.w) {
             this.vx = 6
         }
-        else if(key === KEY_LEFT) {
+        else if(key === KEY_LEFT && this.x > 0) {
             this.vx = -6
         }
     }

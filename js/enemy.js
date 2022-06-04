@@ -5,39 +5,45 @@ class Enemy {
         this.x = 0
         this.y = 0
 
-        this.row = 3
-        this.colum = 5
+        this.w = 74
+        this.h = 21
 
-        this.w = 75
-        this.h = 20
+        this.row = 3
+        this.colum = 7
 
         this.padding = 10
-        this.marginTop = 30
-        this.marginLeft = 30
 
         this.rect = [];
+
+        for (let n = 0; n < this.colum; n++) {
+            this.rect[n] = [];
+    
+            for (let m = 0 ; m < this.row; m++) {
+                this.rect [n][m] = { x: 0, y: 0 }
+            }
+        }
 
         this.rectX = 0
         this.rectY = 0
     }
 
     draw() {
+        for (let n = 0; n < this.colum; n++) {
+            for (let m = 0; m < this.row; m++) {
+                this.rectX = (n * (this.w + this.padding)) + this.padding
+                this.rectY = (m * (this.h + this.padding)) + this.padding
+                this.rect[n][m].x = this.rectX
+                this.rect[n][m].y = this.rectY
 
-        for (let k = 0; k < this.colum; k++) {
-            this.rect[k] = []
-
-            for(let m = 0; m < this.row; m++) {
-                this.rectX = (k * (this.w + this.padding)) + this.marginLeft;
-                this.rectY = (m * (this.h + this.padding)) + this.marginTop;
-
-                this.rect[k][m].this.x = rectX;
-                this.rect[k][m].this.y = rectY;
-
-                this.ctx.rect(this.x, this.y, this.w, this.h)
-                this.ctx.fillStyle = "white"
+                const prevStyle = this.ctx.fillStyle
+                this.ctx.fillStyle = 'white'
+                this.ctx.rect(this.rectX, this.rectY, this.w, this.h)
                 this.ctx.fill()
+                this.ctx.fillStyle = prevStyle
             }
         }
     }
+
+
 }
 

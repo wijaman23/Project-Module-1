@@ -1,11 +1,15 @@
 
+//Se crea canvas
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
 
+//Llamada a la clase game
 const game = new Game(ctx)
 
+//Reconocimiento del boton en el html
 const btn = document.getElementById('start-btn')
 
+//Llamada a incio del juego o a la pausa con el boton del html
 btn.addEventListener('click', function(){
     if (game.interval){
         game.stop()
