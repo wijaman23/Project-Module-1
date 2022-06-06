@@ -5,45 +5,88 @@ class Enemy {
         this.x = 0
         this.y = 0
 
-        this.w = 74
-        this.h = 21
+        this.w = 103
+        this.h = 25
 
-        this.row = 3
-        this.colum = 7
+        this.row = 7
+        this.colum = 3
 
         this.padding = 10
 
-        this.rect = [];
+        this.rect = []
 
-        for (let n = 0; n < this.colum; n++) {
+        this.img = new Image()
+        this.img.src = '/img/leganes.jpeg'
+
+        this.img2 = new Image()
+        this.img2.src = '/img/rayo.jpeg'
+
+        this.img3 = new Image()
+        this.img3.src = '/img/atletico.jpeg'
+
+        this.img4 = new Image()
+        this.img4.src = '/img/getafe.jpeg'
+
+        this.createRect()
+        this.countCreate = 0
+    }
+
+    createRect (){
+        for (let n = 0; n < this.row; n++) {
             this.rect[n] = [];
     
-            for (let m = 0 ; m < this.row; m++) {
-                this.rect [n][m] = { x: 0, y: 0 }
+            for (let m = 0 ; m < this.colum; m++) {
+                this.rect [n][m] = {
+                    x: n * (this.w + this.padding) + this.padding, 
+                    y: m * (this.h + this.padding) + this.padding, 
+                    status: true,
+                }
             }
         }
-
-        this.rectX = 0
-        this.rectY = 0
+        this.countCreate++
     }
+ 
+    draw() { 
+        for (let n = 0; n < this.row; n++) {
+            for (let m = 0; m < this.colum; m++) {
+                
+                let b = this.rect[n][m]
 
-    draw() {
-        for (let n = 0; n < this.colum; n++) {
-            for (let m = 0; m < this.row; m++) {
-                this.rectX = (n * (this.w + this.padding)) + this.padding
-                this.rectY = (m * (this.h + this.padding)) + this.padding
-                this.rect[n][m].x = this.rectX
-                this.rect[n][m].y = this.rectY
-
-                const prevStyle = this.ctx.fillStyle
-                this.ctx.fillStyle = 'white'
-                this.ctx.rect(this.rectX, this.rectY, this.w, this.h)
-                this.ctx.fill()
-                this.ctx.fillStyle = prevStyle
+                if(b.status && (!this.countCreate)){
+                    this.ctx.drawImage(
+                        this.img,
+                        b.x,
+                        b.y,
+                        this.w,
+                        this.h
+                      )
+                } else if (b.status && this.countCreate === 1) {
+                    this.ctx.drawImage(
+                        this.img2,
+                        b.x,
+                        b.y,
+                        this.w,
+                        this.h
+                    )
+                } else if (b.status && this.countCreate === 2) {
+                    this.ctx.drawImage(
+                        this.img4,
+                        b.x,
+                        b.y,
+                        this.w,
+                        this.h
+                    )
+                } else if (b.status && this.countCreate > 2) {
+                    this.ctx.drawImage(
+                        this.img3,
+                        b.x,
+                        b.y,
+                        this.w,
+                        this.h
+                    )
+                }
             }
         }
     }
-
-
 }
 

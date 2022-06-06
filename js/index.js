@@ -8,6 +8,7 @@ const game = new Game(ctx)
 
 //Reconocimiento del boton en el html
 const btn = document.getElementById('start-btn')
+const btn2 = document.getElementById('reload')
 
 //Llamada a incio del juego o a la pausa con el boton del html
 btn.addEventListener('click', function(){
@@ -19,4 +20,8 @@ btn.addEventListener('click', function(){
         btn.innerText = 'PAUSE'
         document.getElementById("canvas").style.visibility = "visible"
     }
+})
+//Llamada para reinciar el juego
+btn2.addEventListener('click', function(){
+    location.reload()
 })

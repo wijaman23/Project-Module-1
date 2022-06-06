@@ -11,13 +11,32 @@
     <div class="container">
         <div class="instructions">
             <img src="./img/Arkanoid-logo.png" alt="" class="logo-img"/>
-            <button id="start-btn">START</button>
+            <div class="btn-start">
+                <button id="start-btn">START</button>
+                <button id="reload">Nuevo juego</button>
+            </div>
             <p>How to play: Use the left and right arrow to control the game!</p>
-            <img src="./img/firma.png" alt="" class="firma-img"/>
+            <div class="btn-game">
+                <img src="/img/btn-left.png" ">
+                <img src="/img/btn-right.png" ">
+            </div>
+            <img src="/img/firma.png" alt="" class="firma-img"/>
         </div>
     
-        <div class="game">
-            <canvas id="canvas" width="600" height="700"></canvas>
+        <div class="game-canvas">
+            <canvas id="canvas" width="800" height="850"></canvas>
+            <div id="game-over">
+                <img class="tarjeta-roja" src="/img/roja.png">
+                <img class="good-bye" src="/img/adios.png">
+            </div>
+            <div id="win-game">
+                <img class="copa-game" src="/img/champion.png">
+                <img class="campones-game" src="/img/campeones.png">
+            </div>
+        </div>
+        
+        <div class="game-contador">
+
         </div>
     </div>
 

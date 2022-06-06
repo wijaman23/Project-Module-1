@@ -2,33 +2,26 @@ class Player {
     constructor(ctx) {
         this.ctx = ctx
         this.x = ctx.canvas.width / 2 
-        this.y = ctx.canvas.height - 10
+        this.y = ctx.canvas.height - 50
 
-        this.w = 80
-        this.h = 12
+        this.w = 150
+        this.h = 40
 
         this.vx = 0
 
-        this.color = 'red'
-
-        this.ctx.lineWidth = 5
-
-        this.audio = new Audio('/audio/Chiptronical.ogg')
-        this.audio.loop = true
+        this.img = new Image()
+        this.img.src = '/img/barra.png'
     }
 
 
     draw() {
-        const prevStyle = this.ctx.fillStyle
-        this.ctx.fillStyle = this.color
-        this.ctx.fillRect(this.x, this.y - this.h, this.w, this.h)
-        
-        this.ctx.strokeStyle = 'white'
-        this.ctx.strokeRect(this.x, this.y - this.h, this.w, this.h)
-
-        this.ctx.fillStyle = prevStyle
-        
-        this.audio.play()
+        this.ctx.drawImage(
+            this.img,
+            this.x,
+            this.y,
+            this.w,
+            this.h
+          )
     }
 
     move() {  

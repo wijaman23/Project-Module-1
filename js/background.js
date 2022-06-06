@@ -9,7 +9,7 @@ class Background {
       this.h = this.ctx.canvas.height
   
       this.img = new Image()
-      this.img.src = '../img/backgraund.jpg'
+      this.img.src = '/img/background-cesped.jpeg'
     }
   
     draw() {
@@ -21,13 +21,13 @@ class Background {
         this.h
       )
   
-    this.ctx.drawImage(
-        this.img,
-        this.x,
-        this.y + this.ctx.canvas.height,
-        this.w,
-        this.h
-      )
+      this.ctx.drawImage(
+          this.img,
+          this.x,
+          this.y + this.ctx.canvas.height,
+          this.w,
+          this.h
+        )
     }
   
     move() {
