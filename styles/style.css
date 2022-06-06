@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Blaka+Hollow&display=swap');
 * {padding: 0;
      margin: 0; 
 }
@@ -10,7 +11,8 @@ canvas {
     visibility: hidden;
 }
 p{
-    font-size: 25px;
+    font-size: 35px;
+    font-family: 'Blaka Hollow', cursive;
 }
 .instructions{
     display: flex;
@@ -30,7 +32,7 @@ p{
 #start-btn{
     width: 30%;
     height: 50%;
-    font-size: 40px;
+    font-size: 70px;
     cursor: pointer;
     text-align: center;
     border-radius: 25%;
@@ -38,6 +40,7 @@ p{
     margin-top: 5%;
     margin-bottom: 10%;
     margin-left: 28%;
+    font-family: 'Blaka Hollow', cursive;
 }
 #start-btn:hover{
     cursor:pointer;
@@ -65,6 +68,7 @@ p{
     margin-bottom: 10%;
     margin-left: -30%;
     visibility: hidden;
+    font-family: 'Blaka Hollow', cursive;
 }
 .firma-img{
     width: 25%;
@@ -103,12 +107,18 @@ p{
     width: 370px;
     height: 200px;
 }
-.game-contador{
+.game-scoreboard{
     width: 100px;
-    height: 700px;
-    margin-left: -7%;
-
-    border-color: #0c0b0b;
-   border-width: 1px;
-   border-style: solid;
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    font-family: 'Blaka Hollow', cursive;
+    font-size: 40px;
+    visibility: hidden;
+}
+.game-scoreboard h3 {
+    color: red;
+    font-size: 45px;
+    align-items: center;
 }

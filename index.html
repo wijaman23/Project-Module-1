@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css" />
-    <title>Document</title>
+    <title>Arkanoid</title>
 </head>
 <body>
     <div class="container">
@@ -13,7 +13,7 @@
             <img src="./img/Arkanoid-logo.png" alt="" class="logo-img"/>
             <div class="btn-start">
                 <button id="start-btn">START</button>
-                <button id="reload">Nuevo juego</button>
+                <button id="reload">NUEVO JUEGO</button>
             </div>
             <p>How to play: Use the left and right arrow to control the game!</p>
             <div class="btn-game">
@@ -35,8 +35,19 @@
             </div>
         </div>
         
-        <div class="game-contador">
-
+        <div id="scoreboard" class="game-scoreboard">
+            <div>
+                <h2>LIVE</h2>
+                <h3 id="scoreboard-live">3</h3>
+            </div>
+            <div>
+                <h2>SCORE</h2>
+                <h3 id="scoreboard-score">0</h3>
+            </div>
+            <div>
+                <h2>ROUND</h2>
+                <h3 id="scoreboard-round">1 / 5</h3>
+            </div>
         </div>
     </div>
 

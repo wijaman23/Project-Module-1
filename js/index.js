@@ -19,6 +19,7 @@ btn.addEventListener('click', function(){
         game.start()
         btn.innerText = 'PAUSE'
         document.getElementById("canvas").style.visibility = "visible"
+        document.getElementById("scoreboard").style.visibility = "visible"
     }
 })
 //Llamada para reinciar el juego

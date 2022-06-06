@@ -18,8 +18,15 @@ class Game {
         this.audioLife = new Audio('/audio/ballLost.mp3')
         this.audioGameOver = new Audio('/audio/game-over.mp3')
         this.audioBang = new Audio('/audio/pitido.mp3')
+        this.audioWin = new Audio('/audio/campeon.mp3')
 
+        this.btnLive = document.getElementById('scoreboard-live')
+        this.btnScore = document.getElementById('scoreboard-score')
+        this.btnRounnd = document.getElementById('scoreboard-round')
+
+        this.score = 0
         this.life = 3
+        this.round = 1
 
         this.count = 0
     }
@@ -101,6 +108,7 @@ class Game {
           this.life-- // pierde una vida
           this.audioLife.play()
           this.resetLife();
+          this.btnLive.innerText = this.life
         } else {
           this.gameOver()
         }
@@ -150,6 +158,8 @@ class Game {
                     this.audioBang.play()
                     this.ball.vy = -this.ball.vy
                     b.status = false
+                    this.score+=100
+                    this.btnScore.innerText = this.score
                 }
             }        
           }
@@ -172,6 +182,15 @@ class Game {
         this.enemy.createRect()
         this.resetLife()
         this.ball.speed += 2    
+        this.round+=1
+        this.btnRounnd.innerText = this.round
+      } 
+      if (this.round === 5) {
+        this.stop()
+        document.getElementById("win-game").style.visibility = "visible"
+        this.audioWin.play()
+        document.getElementById("reload").style.visibility = "visible"
+        document.getElementById("start-btn").style.visibility = "hidden"
       }
     }
 
@@ -181,6 +200,6 @@ class Game {
         this.audioGameOver.play()
         document.getElementById("start-btn").style.visibility = "hidden"
         document.getElementById("reload").style.visibility = "visible"
-        document.getElementById("game-over").style.visibility = "visible"
+        document.getElementById("start-btn").style.visibility = "hidden"
     }
 }
