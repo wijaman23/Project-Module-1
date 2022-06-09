@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css" />
+    <link rel="shortcut icon" href="#">
     <title>Arkanoid</title>
 </head>
-<body>
+<body class="body-class">
     <div class="container">
         <div class="instructions">
             <img src="./img/Arkanoid-logo.png" alt="" class="logo-img"/>
@@ -20,14 +21,13 @@
                 <img src="/img/btn-left.png" ">
                 <img src="/img/btn-right.png" ">
             </div>
-            <img src="/img/firma.png" alt="" class="firma-img"/>
         </div>
     
         <div class="game-canvas">
-            <canvas id="canvas" width="800" height="850"></canvas>
+            <canvas id="canvas" width="850" height="910"></canvas>
             <div id="game-over">
                 <img class="tarjeta-roja" src="/img/roja.png">
-                <img class="good-bye" src="/img/adios.png">
+                <img class="good-bye" src="/img/gameOver.png">
             </div>
             <div id="win-game">
                 <img class="copa-game" src="/img/champion.png">
@@ -53,6 +53,7 @@
 
     <script type="text/javascript" src="./js/constants.js"></script>
     <script type="text/javascript" src="./js/background.js"></script>
+    <script type="text/javascript" src="./js/gift.js"></script>
     <script type="text/javascript" src="./js/enemy.js"></script>     
     <script type="text/javascript" src="./js/player.js"></script>  
     <script type="text/javascript" src="./js/ball.js"></script>  

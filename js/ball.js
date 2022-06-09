@@ -9,9 +9,6 @@ class Ball {
 
         this.vx = 8 * (Math.random() * 2 - 1)
         this.vy = -8
-
-        this.img = new Image()
-        this.img.src = '/img/pelota.png'
     }
 
     draw(){

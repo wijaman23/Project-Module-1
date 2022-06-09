@@ -5,7 +5,7 @@ class Enemy {
         this.x = 0
         this.y = 0
 
-        this.w = 103
+        this.w = 110
         this.h = 25
 
         this.row = 7
@@ -15,22 +15,19 @@ class Enemy {
 
         this.rect = []
 
-        this.img = new Image()
-        this.img.src = '/img/leganes.jpeg'
-
-        this.img2 = new Image()
-        this.img2.src = '/img/rayo.jpeg'
-
-        this.img3 = new Image()
-        this.img3.src = '/img/atletico.jpeg'
-
-        this.img4 = new Image()
-        this.img4.src = '/img/getafe.jpeg'
-
         this.createRect()
         this.countCreate = 0
-    }
 
+        this.img = new Image()
+        this.img.src = '/img/leganes.jpeg'
+        this.img2 = new Image()
+        this.img2.src = '/img/rayo.jpeg'
+        this.img3 = new Image()
+        this.img3.src = '/img/atletico.jpeg'
+        this.img4 = new Image()
+        this.img4.src = '/img/getafe.jpeg'
+    }
+    //metodo para crear los enemigos
     createRect (){
         for (let n = 0; n < this.row; n++) {
             this.rect[n] = [];
@@ -45,7 +42,7 @@ class Enemy {
         }
         this.countCreate++
     }
- 
+    //Metodo para dibujar los enemigos
     draw() { 
         for (let n = 0; n < this.row; n++) {
             for (let m = 0; m < this.colum; m++) {
