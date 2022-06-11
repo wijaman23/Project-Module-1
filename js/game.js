@@ -18,7 +18,7 @@ class Game {
         this.audioLife = new Audio('/audio/ballLost.mp3')
         this.audioGameOver = new Audio('/audio/game-over.mp3')
         this.audioBang = new Audio('/audio/pitido.mp3')
-        this.audioWin = new Audio('/audio/campeon.mp3')
+        this.audioWin = new Audio('/audio/winGame2.mp3')
         
 
         //Panel a la derecha del canvas donde se refleja los marcadores
@@ -62,14 +62,18 @@ class Game {
         this.ball.draw()
         this.player.draw()
         this.bricks.draw()
-        if (this.score === 100) {
-          this.gift.draw(true)
-          if(this.ctx.canvas.height < this.gift.y){
-            this.gift.y = 0
-            this.gift.vy = 0
-          }
-        } else if (this.score === 400){
-          this.gift.draw(false)
+        if ((this.score === 100 || this.score === 500) && this.ctx.canvas.height > this.gift.y) {
+          this.gift.draw("good")
+            if(this.ctx.canvas.height < (this.gift.y + 10)){
+              this.gift.y = -100
+              this.gift.vy = 0
+            }
+        } else if (this.score === 300 && this.ctx.canvas.height > this.gift.y){
+          this.gift.draw("bad") 
+            if(this.ctx.canvas.height < (this.gift.y + 10)){
+                this.gift.y = -200
+ 
+            }   
         }
     }    
 
@@ -78,9 +82,9 @@ class Game {
         this.bg.move()
         this.player.move()
         this.ball.move()
-        if (this.score === 100){
+        if (this.score === 100 || this.score === 500){
           this.gift.move()
-        } else if (this.score === 400) {
+        } else if (this.score === 300) {
           this.gift.vy = 5
           this.gift.move()
         } 
@@ -90,8 +94,8 @@ class Game {
     collide() {
       this.collisionCanvasBall()
       this.collisionPlayerBall()
-      this.collisionBallRect()
-      this.collisionGiftRect()
+      this.collisionBallBricks()
+      this.collisionGiftBricks()
       this.nextLevel()
     }
 
@@ -107,20 +111,15 @@ class Game {
 
     //Metodo donde se identifica la colision de la bola con el canvas
     collisionCanvasBall(){
-      if (this.ball.x + this.ball.r > this.ctx.canvas.width || this.ball.x - this.ball.r < 0) { 
-        this.ball.vx = -this.ball.vx
-      }
-
-      if (this.ball.y - this.ball.r < 0) {
-        this.ball.vy = -this.ball.vy
-      }
+      //Colisiones de la bola con el canvas
+      this.ball.collisionBall()
 
       //Saber si la bola ha tocado fondo
       if(this.ball.y + this.ball.r > this.ctx.canvas.height) {
         if(this.life > 1){  
           this.life-- 
           this.audioLife.play()
-          this.resetBall()
+          this.ball.resetBall()
           this.btnLive.innerText = this.life
           this.player.w = 150
         } else {
@@ -148,7 +147,7 @@ class Game {
     }
 
     //Metodo colision bola con el ladrillo/rectangulo superior
-    collisionBallRect() {
+    collisionBallBricks() {
       for (let n = 0; n < this.bricks.colum; n++) {
           for (let m = 0; m < this.bricks.row; m++) {
 
@@ -172,22 +171,12 @@ class Game {
     }
 
     //Metodo colision premio con player
-    collisionGiftRect() {
-      if (this.player.collideWith(this.gift) && this.score === 100) {
+    collisionGiftBricks() {
+      if (this.player.collideWith(this.gift) && (this.score === 100 || this.score === 500)) {
           this.player.w = 200
-      } else if (this.player.collideWith(this.gift) && this.score === 400) {
+      } else if (this.player.collideWith(this.gift) && this.score === 300) {
           this.player.w = 100
       }
-    }
-    
-    //Metodo lanza una bola nueva 
-    resetBall() {
-      this.ball.x = ctx.canvas.width / 2
-      this.ball.y = ctx.canvas.height - this.ball.r
-
-      //Se da velocidad de lanzamiento cuando toque la pala y se hace aleatoriamente la salida
-      this.ball.vx = 6 * (Math.random() * 2 - 1)
-      this.ball.vy = -6
     }
 
     //Metodo para subir de nievl
@@ -200,17 +189,23 @@ class Game {
           levelDone = levelDone && ! this.bricks.brick[n][m].status
         }
       }
-      
+
       //Si se pasa de nivel se dibuja nuevos ladrillos y lanzo una pelota desde 0
       if (levelDone) {
         this.bricks.row++
-        this.bricks.createRect()
-        this.resetBall()
+        this.bricks.createBrick()
+        this.ball.resetBall()
         //Se aumenta el nivel de velocidad cuando toque la pala
         this.ball.speed += 2   
         //Se aumenta de ronda en uno y se inserta en el canvas
         this.round+=1
-        this.btnRounnd.innerText = this.round
+
+        if (this.round === 4) {
+          this.btnRounnd.innerText = 'Last rival'
+        } else {
+          this.btnRounnd.innerText = this.round + ' / 5'
+        }
+
       } 
       //Cuando se pase el ultimo nivel se ejecuta la parada del juego y se inicia la musica de ganador
       if (this.round === 5) {
@@ -220,6 +215,33 @@ class Game {
         document.getElementById("reload").style.visibility = "visible"
         document.getElementById("start-btn").style.visibility = "hidden"
       }
+
+      //Dibujar los escudos de cada nivel
+      switch (this.round) {
+        case 2:
+          document.getElementById("shieldRYO").style.visibility = "visible"
+          document.getElementById("shieldLGN").style.visibility = "hidden"
+          break;
+
+        case 3:
+          document.getElementById("shieldGTF").style.visibility = "visible"
+          document.getElementById("shieldRYO").style.visibility = "hidden"
+          break;
+
+        case 4:
+          document.getElementById("shieldATM").style.visibility = "visible"
+          document.getElementById("shieldGTF").style.visibility = "hidden"
+          break;
+
+        case 5:
+            document.getElementById("shieldATM").style.visibility = "hidden"
+            document.getElementById("shieldGTF").style.visibility = "hidden"
+            document.getElementById("shield2").style.visibility = "hidden"
+            document.getElementById("shieldFLOREN").style.visibility = "visible"
+            break;
+      }
+
+
     }
 
     //Metodo para finalizar el juevo

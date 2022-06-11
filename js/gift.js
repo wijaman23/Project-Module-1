@@ -14,13 +14,11 @@ class Gift {
         this.img.src = '/img/premio.png'
         this.img2 = new Image()
         this.img2.src = '/img/amarilla.png'
-
-        this.audioGift = new Audio('/audio/match1.wav')
     }
     
 
     draw (element) {
-        if (element === true) {
+        if (element === "good") {
            this.ctx.drawImage(
                 this.img,
                 this.x,
@@ -28,7 +26,7 @@ class Gift {
                 this.w,
                 this.h
               )
-        } else {
+        } else if (element === "bad") {
             this.ctx.drawImage(
                 this.img2,
                 this.x,
@@ -37,7 +35,6 @@ class Gift {
                 this.h
               )
         }
-        this.audioGift.play()
     }
 
     move () {

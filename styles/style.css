@@ -131,3 +131,52 @@ canvas {
     font-size: 45px;
     align-items: center;
 }
+.imgShield {
+    display: flex;
+}
+.shield{
+    width: 80px;
+    height: auto;
+}
+.shield2 {
+    width: 50px;
+    height: auto;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.imgShieldRivals {
+    margin-top: 10px;
+    position: relative;
+}
+.shieldLGN {
+    width: 110px;
+    height: auto;
+    position: absolute;
+}
+.shieldRYO {
+    width: 110px;
+    height: auto;
+    visibility: hidden;
+    position: absolute;
+}
+.shieldGTF {
+    width: 100px;
+    height: auto;
+    visibility: hidden;
+    position: absolute;
+}
+.shieldATM{
+    width: 80px;
+    height: auto;
+    visibility: hidden;
+    position: absolute;
+}
+.shieldFLOREN{
+    width: 180px;
+    height: auto;
+    margin-left: -80px;
+    margin-top: -60px;
+    visibility: hidden;
+    position: absolute;
+}
