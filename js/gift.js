@@ -2,13 +2,13 @@ class Gift {
     constructor(ctx){
         this.ctx = ctx
 
-        this.x = 100
+        this.x = ctx.canvas.width / 2 
         this.y = 0
 
         this.w = 70
         this.h = 70
 
-        this.vy = 5
+        this.vy = 9
 
         this.img = new Image()
         this.img.src = '/img/premio.png'

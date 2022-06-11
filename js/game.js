@@ -84,7 +84,7 @@ class Game {
         if (this.score === 100){
           this.gift.move()
         } else if (this.score === 300) {
-          this.gift.vy = 5
+          this.gift.vy = 9
           this.gift.move()
         } 
     }
@@ -204,7 +204,7 @@ class Game {
         } else if (this.round === 5) {
           this.btnRounnd.innerText = 'CAMPEON'
         } else {
-          this.btnRounnd.innerText = this.round + ' / 5'
+          this.btnRounnd.innerText = this.round + ' / 4'
         }
 
       } 
@@ -252,5 +252,6 @@ class Game {
         document.getElementById("game-over").style.visibility = "visible"
         document.getElementById("reload").style.visibility = "visible"
         document.getElementById('gift').style.visibility = "hidden"
+        this.btnLive.innerText = 'Expulsado'
     }
 }

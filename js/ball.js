@@ -7,8 +7,8 @@ class Ball {
         
         this.speed = 10
 
-        this.vx = 8 * (Math.random() * 2 - 1)
-        this.vy = -8
+        this.vx = 6 * (Math.random() * 2 - 1)
+        this.vy = -6
     }
 
     draw(){
@@ -44,7 +44,7 @@ class Ball {
         this.y = this.ctx.canvas.height - this.r
   
         //Se da velocidad de lanzamiento cuando toque la pala y se hace aleatoriamente la salida
-        this.vx = 8 * (Math.random() * 2 - 1)
-        this.vy = -8
+        this.vx = 6 * (Math.random() * 2 - 1)
+        this.vy = -6
       }
 }

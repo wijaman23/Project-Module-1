@@ -9,7 +9,7 @@ class Bricks {
         this.h = 25
 
         this.row = 3
-        this.colum = 7
+        this.colum = 6
 
         this.padding = 10
 
