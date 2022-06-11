@@ -8,7 +8,7 @@ class Gift {
         this.w = 70
         this.h = 70
 
-        this.vy = 9
+        this.vy = 8
 
         this.img = new Image()
         this.img.src = '/img/premio.png'

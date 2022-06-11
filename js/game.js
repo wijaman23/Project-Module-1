@@ -252,6 +252,6 @@ class Game {
         document.getElementById("game-over").style.visibility = "visible"
         document.getElementById("reload").style.visibility = "visible"
         document.getElementById('gift').style.visibility = "hidden"
-        this.btnLive.innerText = 'Expulsado'
+        this.btnLive.innerText = 'EXPULSADO'
     }
 }
