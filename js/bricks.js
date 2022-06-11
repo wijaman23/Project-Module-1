@@ -1,4 +1,4 @@
-class Enemy {
+class Bricks {
     constructor(ctx) {
         this.ctx = ctx
 
@@ -8,14 +8,14 @@ class Enemy {
         this.w = 110
         this.h = 25
 
-        this.row = 7
-        this.colum = 3
+        this.row = 3
+        this.colum = 7
 
         this.padding = 10
 
-        this.rect = []
+        this.brick = []
 
-        this.createRect()
+        this.createBrick()
         this.countCreate = 0
 
         this.img = new Image()
@@ -28,12 +28,12 @@ class Enemy {
         this.img4.src = '/img/getafe.jpeg'
     }
     //metodo para crear los enemigos
-    createRect (){
-        for (let n = 0; n < this.row; n++) {
-            this.rect[n] = [];
+    createBrick (){
+        for (let n = 0; n < this.colum; n++) {
+            this.brick[n] = [];
     
-            for (let m = 0 ; m < this.colum; m++) {
-                this.rect [n][m] = {
+            for (let m = 0 ; m < this.row; m++) {
+                this.brick [n][m] = {
                     x: n * (this.w + this.padding) + this.padding, 
                     y: m * (this.h + this.padding) + this.padding, 
                     status: true,
@@ -44,10 +44,10 @@ class Enemy {
     }
     //Metodo para dibujar los enemigos
     draw() { 
-        for (let n = 0; n < this.row; n++) {
-            for (let m = 0; m < this.colum; m++) {
+        for (let n = 0; n < this.colum; n++) {
+            for (let m = 0; m < this.row; m++) {
                 
-                let b = this.rect[n][m]
+                let b = this.brick[n][m]
 
                 if(b.status && (!this.countCreate)){
                     this.ctx.drawImage(

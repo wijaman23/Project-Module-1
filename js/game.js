@@ -8,7 +8,7 @@ class Game {
         this.bg = new Background(ctx)
         this.ball = new Ball(ctx)
         this.player = new Player(ctx)
-        this.enemy = new Enemy(ctx)
+        this.bricks = new Bricks(ctx)
         this.gift = new Gift(ctx)
 
         this.setListeners();
@@ -19,6 +19,7 @@ class Game {
         this.audioGameOver = new Audio('/audio/game-over.mp3')
         this.audioBang = new Audio('/audio/pitido.mp3')
         this.audioWin = new Audio('/audio/campeon.mp3')
+        
 
         //Panel a la derecha del canvas donde se refleja los marcadores
         this.btnLive = document.getElementById('scoreboard-live')
@@ -37,6 +38,7 @@ class Game {
             this.clear()
             this.draw()
             this.move()
+            this.collide()
         }, 1000 / 60)
     }
 
@@ -59,9 +61,11 @@ class Game {
         this.bg.draw()
         this.ball.draw()
         this.player.draw()
-        this.enemy.draw()
-        if (this.score === 100 && this.gift.y < this.ctx.canvas.height){
-          this.gift.draw()
+        this.bricks.draw()
+        if (this.score === 100 && this.gift.y < (this.ctx.canvas.height + 20)) {
+          this.gift.draw(true)
+        } else if (this.score === 400 && this.gift.y < (this.ctx.canvas.height + 20)) {
+          this.gift.draw(false)
         }
     }    
 
@@ -70,16 +74,20 @@ class Game {
         this.bg.move()
         this.player.move()
         this.ball.move()
-        if (this.score === 100 && this.gift.y < this.ctx.canvas.height){
+        if (this.score === 100){
           this.gift.move()
+        } else if (this.score === 400) {
+          this.gift.draw()
+          this.gift.vy = 4
+        } else {
+          this.gift.y = 0
         }
-        this.collision()
     }
 
     //Metodo que mira todas las colisiones
-    collision(){
-      this.colisionCanvasBall()
-      this.colisionPlayerBall()
+    collide() {
+      this.collisionCanvasBall()
+      this.collisionPlayerBall()
       this.collisionBallRect()
       this.collisionGiftRect()
       this.nextLevel()
@@ -96,7 +104,7 @@ class Game {
     }
 
     //Metodo donde se identifica la colision de la bola con el canvas
-    colisionCanvasBall(){
+    collisionCanvasBall(){
       if (this.ball.x + this.ball.r > this.ctx.canvas.width || this.ball.x - this.ball.r < 0) { 
         this.ball.vx = -this.ball.vx
       }
@@ -110,7 +118,7 @@ class Game {
         if(this.life > 1){  
           this.life-- 
           this.audioLife.play()
-          this.resetLife();
+          this.resetBall()
           this.btnLive.innerText = this.life
           this.player.w = 150
         } else {
@@ -120,37 +128,36 @@ class Game {
     }
 
     //Metodo colision pelota y jugador
-    colisionPlayerBall() {
-      if (this.ball.x < this.player.x + this.player.w && this.ball.x > this.player.x && 
-        this.player.y < this.player.y + this.player.h && this.ball.y > this.player.y){
+    collisionPlayerBall() {
+      if (this.ball.collideWith(this.player)){
 
           //Se comprueba donde colisiona la pelota con el jugador
-          let colBallOnPlayer = this.ball.x - (this.player.x + this.player.w / 2);
+          let colBallOnPlayer = this.ball.x - (this.player.x + this.player.w / 2)
         
           // Se normalizan los valores
-          colBallOnPlayer = colBallOnPlayer / (this.player.w / 2);
+          colBallOnPlayer = colBallOnPlayer / (this.player.w / 2)
           
           // Se crea constante con el angulo
-          let angle = colBallOnPlayer * Math.PI / 3;
+          let angle = colBallOnPlayer * Math.PI / 3
               
-          this.ball.vx = this.ball.speed * Math.sin(angle);
-          this.ball.vy = -this.ball.speed * Math.cos(angle);
+          this.ball.vx = this.ball.speed * Math.sin(angle)
+          this.ball.vy = -this.ball.speed * Math.cos(angle)
       }
     }
 
     //Metodo colision bola con el ladrillo/rectangulo superior
     collisionBallRect() {
-      for (let n = 0; n < this.enemy.row; n++) {
-          for (let m = 0; m < this.enemy.colum; m++) {
+      for (let n = 0; n < this.bricks.colum; n++) {
+          for (let m = 0; m < this.bricks.row; m++) {
 
-            let b = this.enemy.rect [n][m]
+            let b = this.bricks.brick [n][m]
 
             //Verifico que si esta en true el estado entra en el if
             if (b.status) {
                 if(this.ball.x + this.ball.r > b.x && 
-                  this.ball.x - this.ball.r < b.x + this.enemy.w && 
+                  this.ball.x - this.ball.r < b.x + this.bricks.w && 
                   this.ball.y + this.ball.r > b.y && 
-                  this.ball.y - this.ball.r < b.y + this.enemy.h) {
+                  this.ball.y - this.ball.r < b.y + this.bricks.h) {
                     this.audioBang.play()
                     this.ball.vy = -this.ball.vy
                     b.status = false
@@ -164,21 +171,22 @@ class Game {
 
     //Metodo colision premio con player
     collisionGiftRect() {
-      if (this.gift.x < this.player.x + this.player.w && this.gift.x > this.player.x 
-         && this.gift.y > this.player.y + 10) {
-
+      if (this.player.collideWith(this.gift) && this.score === 100) {
           this.player.w = 200
+          this.gift.y = -20
+      } else if (this.player.collideWith(this.gift) && this.score === 400) {
+          this.player.w = 100
       }
     }
     
     //Metodo lanza una bola nueva 
-    resetLife() {
+    resetBall() {
       this.ball.x = ctx.canvas.width / 2
       this.ball.y = ctx.canvas.height - this.ball.r
 
       //Se da velocidad de lanzamiento cuando toque la pala y se hace aleatoriamente la salida
-      this.ball.vx = 8 * (Math.random() * 2 - 1)
-      this.ball.vy = -8
+      this.ball.vx = 6 * (Math.random() * 2 - 1)
+      this.ball.vy = -6
     }
 
     //Metodo para subir de nievl
@@ -186,17 +194,17 @@ class Game {
       let levelDone = true
       
       // Miramos si estan todas los ladrillos con status false
-      for (let n = 0; n < this.enemy.row; n++) {
-        for (let m = 0; m < this.enemy.colum; m++) {
-          levelDone = levelDone && ! this.enemy.rect[n][m].status
+      for (let n = 0; n < this.bricks.colum; n++) {
+        for (let m = 0; m < this.bricks.row; m++) {
+          levelDone = levelDone && ! this.bricks.brick[n][m].status
         }
       }
       
       //Si se pasa de nivel se dibuja nuevos ladrillos y lanzo una pelota desde 0
       if (levelDone) {
-        this.enemy.colum++
-        this.enemy.createRect()
-        this.resetLife()
+        this.bricks.row++
+        this.bricks.createRect()
+        this.resetBall()
         //Se aumenta el nivel de velocidad cuando toque la pala
         this.ball.speed += 2   
         //Se aumenta de ronda en uno y se inserta en el canvas

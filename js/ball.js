@@ -23,4 +23,9 @@ class Ball {
         this.x += this.vx
         this.y += this.vy
     }
+    
+    collideWith(element){
+        return this.x < element.x + element.w && this.x > element.x && 
+            element.y < element.y + element.h && this.y > element.y
+    }
 }

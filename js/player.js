@@ -37,6 +37,11 @@ class Player {
         this.x += this.vx
     }
 
+    collideWith(element){
+        return element.x < this.x + this.w && element.x > this.x 
+         && element.y > this.y && element.y < this.y + this.h
+    }
+
     keyDown(key) {
         if(key === KEY_RIGHT && this.x < this.ctx.canvas.width - this.w) {
             this.vx = 6
