@@ -8,8 +8,8 @@ class Bricks {
         this.w = 130
         this.h = 25
 
-        this.row = 1
-        this.colum = 1
+        this.row = 3
+        this.colum = 7
 
         this.padding = 10
 
