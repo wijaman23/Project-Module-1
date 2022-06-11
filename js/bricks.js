@@ -5,11 +5,11 @@ class Bricks {
         this.x = 0
         this.y = 0
 
-        this.w = 110
+        this.w = 130
         this.h = 25
 
-        this.row = 3
-        this.colum = 7
+        this.row = 1
+        this.colum = 1
 
         this.padding = 10
 

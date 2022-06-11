@@ -62,7 +62,7 @@ class Game {
         this.ball.draw()
         this.player.draw()
         this.bricks.draw()
-        if ((this.score === 100 || this.score === 500) && this.ctx.canvas.height > this.gift.y) {
+        if ((this.score === 100) && this.ctx.canvas.height > this.gift.y) {
           this.gift.draw("good")
             if(this.ctx.canvas.height < (this.gift.y + 10)){
               this.gift.y = -100
@@ -71,8 +71,7 @@ class Game {
         } else if (this.score === 300 && this.ctx.canvas.height > this.gift.y){
           this.gift.draw("bad") 
             if(this.ctx.canvas.height < (this.gift.y + 10)){
-                this.gift.y = -200
- 
+                this.gift.y = -1000
             }   
         }
     }    
@@ -82,7 +81,7 @@ class Game {
         this.bg.move()
         this.player.move()
         this.ball.move()
-        if (this.score === 100 || this.score === 500){
+        if (this.score === 100){
           this.gift.move()
         } else if (this.score === 300) {
           this.gift.vy = 5
@@ -172,7 +171,7 @@ class Game {
 
     //Metodo colision premio con player
     collisionGiftBricks() {
-      if (this.player.collideWith(this.gift) && (this.score === 100 || this.score === 500)) {
+      if (this.player.collideWith(this.gift) && this.score === 100) {
           this.player.w = 200
       } else if (this.player.collideWith(this.gift) && this.score === 300) {
           this.player.w = 100
@@ -202,6 +201,8 @@ class Game {
 
         if (this.round === 4) {
           this.btnRounnd.innerText = 'Last rival'
+        } else if (this.round === 5) {
+          this.btnRounnd.innerText = 'CAMPEON'
         } else {
           this.btnRounnd.innerText = this.round + ' / 5'
         }
@@ -234,14 +235,13 @@ class Game {
           break;
 
         case 5:
-            document.getElementById("shieldATM").style.visibility = "hidden"
-            document.getElementById("shieldGTF").style.visibility = "hidden"
-            document.getElementById("shield2").style.visibility = "hidden"
-            document.getElementById("shieldFLOREN").style.visibility = "visible"
-            break;
+          document.getElementById("shieldATM").style.visibility = "hidden"
+          document.getElementById("shieldGTF").style.visibility = "hidden"
+          document.getElementById("shield2").style.visibility = "hidden"
+          document.getElementById("shieldFLOREN").style.visibility = "visible"
+          document.getElementById('gift').style.visibility = "hidden"
+          break;
       }
-
-
     }
 
     //Metodo para finalizar el juevo
@@ -251,5 +251,6 @@ class Game {
         document.getElementById("start-btn").style.visibility = "hidden"
         document.getElementById("game-over").style.visibility = "visible"
         document.getElementById("reload").style.visibility = "visible"
+        document.getElementById('gift').style.visibility = "hidden"
     }
 }

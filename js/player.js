@@ -1,5 +1,5 @@
 class Player {
-    constructor(ctx) {
+    constructor(ctx){
         this.ctx = ctx
         this.x = ctx.canvas.width / 2 
         this.y = ctx.canvas.height - 50
@@ -14,7 +14,7 @@ class Player {
     }
 
 
-    draw() {
+    draw(){
         this.ctx.drawImage(
             this.img,
             this.x,
@@ -24,7 +24,7 @@ class Player {
           )
     }
 
-    move() {  
+    move(){  
         if (this.x + this.w > this.ctx.canvas.width) {
             this.x = this.ctx.canvas.width - this.w
             this.vx = 0;
