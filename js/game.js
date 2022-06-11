@@ -62,9 +62,13 @@ class Game {
         this.ball.draw()
         this.player.draw()
         this.bricks.draw()
-        if (this.score === 100 && this.gift.y < (this.ctx.canvas.height + 20)) {
+        if (this.score === 100) {
           this.gift.draw(true)
-        } else if (this.score === 400 && this.gift.y < (this.ctx.canvas.height + 20)) {
+          if(this.ctx.canvas.height < this.gift.y){
+            this.gift.y = 0
+            this.gift.vy = 0
+          }
+        } else if (this.score === 400){
           this.gift.draw(false)
         }
     }    
@@ -77,11 +81,9 @@ class Game {
         if (this.score === 100){
           this.gift.move()
         } else if (this.score === 400) {
-          this.gift.draw()
-          this.gift.vy = 4
-        } else {
-          this.gift.y = 0
-        }
+          this.gift.vy = 5
+          this.gift.move()
+        } 
     }
 
     //Metodo que mira todas las colisiones
@@ -173,7 +175,6 @@ class Game {
     collisionGiftRect() {
       if (this.player.collideWith(this.gift) && this.score === 100) {
           this.player.w = 200
-          this.gift.y = -20
       } else if (this.player.collideWith(this.gift) && this.score === 400) {
           this.player.w = 100
       }

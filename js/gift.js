@@ -20,7 +20,6 @@ class Gift {
     
 
     draw (element) {
-        console.log(element)
         if (element === true) {
            this.ctx.drawImage(
                 this.img,
@@ -29,7 +28,7 @@ class Gift {
                 this.w,
                 this.h
               )
-        } else if (element === false){
+        } else {
             this.ctx.drawImage(
                 this.img2,
                 this.x,
@@ -41,7 +40,7 @@ class Gift {
         this.audioGift.play()
     }
 
-    move (){
+    move () {
         this.y += this.vy
     }
 }
