@@ -11,9 +11,9 @@ class Gift {
         this.vy = 8
 
         this.img = new Image()
-        this.img.src = '/img/premio.png'
+        this.img.src = './img/premio.png'
         this.img2 = new Image()
-        this.img2.src = '/img/amarilla.png'
+        this.img2.src = './img/amarilla.png'
     }
     
 

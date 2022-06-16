@@ -8,8 +8,8 @@ class Bricks {
         this.w = 130
         this.h = 25
 
-        this.row = 3
-        this.colum = 6
+        this.row = 1
+        this.colum = 1
 
         this.padding = 10
 
@@ -19,13 +19,13 @@ class Bricks {
         this.countCreate = 0
 
         this.img = new Image()
-        this.img.src = '/img/leganes.jpeg'
+        this.img.src = './img/leganes.jpeg'
         this.img2 = new Image()
-        this.img2.src = '/img/rayo.jpeg'
+        this.img2.src = './img/rayo.jpeg'
         this.img3 = new Image()
-        this.img3.src = '/img/atletico.jpeg'
+        this.img3.src = './img/atletico.jpeg'
         this.img4 = new Image()
-        this.img4.src = '/img/getafe.jpeg'
+        this.img4.src = './img/getafe.jpeg'
     }
     //metodo para crear los enemigos
     createBrick (){

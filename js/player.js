@@ -10,7 +10,7 @@ class Player {
         this.vx = 0
 
         this.img = new Image()
-        this.img.src = '/img/barra.png'
+        this.img.src = './img/barra.png'
     }
 
 

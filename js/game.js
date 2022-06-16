@@ -13,12 +13,12 @@ class Game {
 
         this.setListeners();
 
-        this.audio = new Audio('/audio/musicaJuego.mp3')
+        this.audio = new Audio('./audio/musicaJuego.mp3')
         this.audio.loop = true
-        this.audioLife = new Audio('/audio/ballLost.mp3')
-        this.audioGameOver = new Audio('/audio/game-over.mp3')
-        this.audioBang = new Audio('/audio/pitido.mp3')
-        this.audioWin = new Audio('/audio/winGame2.mp3')
+        this.audioLife = new Audio('./audio/ballLost.mp3')
+        this.audioGameOver = new Audio('./audio/game-over.mp3')
+        this.audioBang = new Audio('./audio/pitido.mp3')
+        this.audioWin = new Audio('./audio/winGame2.mp3')
         
 
         //Panel a la derecha del canvas donde se refleja los marcadores
@@ -68,7 +68,7 @@ class Game {
               this.gift.y = -100
               this.gift.vy = 0
             }
-        } else if (this.score === 300 && this.ctx.canvas.height > this.gift.y){
+        } else if (this.score === 300 && this.ctx.canvas.height > this.gift.y) {
           this.gift.draw("bad") 
             if(this.ctx.canvas.height < (this.gift.y + 10)){
                 this.gift.y = -1000

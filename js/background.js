@@ -9,7 +9,7 @@ class Background {
       this.h = this.ctx.canvas.height
   
       this.img = new Image()
-      this.img.src = '/img/background-cesped.jpeg'
+      this.img.src = './img/background-cesped.jpeg'
     }
   
     draw() {
